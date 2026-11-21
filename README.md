@@ -18,7 +18,9 @@ Registra `ABC-123`, comprueba que baja la disponibilidad y registra la salida. L
 
 ## Verificaciones
 
-GitHub Actions construye las imágenes, comprueba los tipos y el build de Vue, ejecuta Maven y prueba el flujo completo por HTTP contra PostgreSQL. El workflow está configurado para PR y push a `develop` y `main`. Para volverlo obligatorio, marca `parking-flow` como check requerido en las reglas de ambas ramas de GitHub.
+GitHub Actions construye las imágenes, ejecuta las pruebas de Vitest, comprueba los tipos y el build de Vue, ejecuta Maven y prueba el flujo completo por HTTP contra PostgreSQL. El workflow está configurado para PR y push a `develop` y `main`. Para volverlo obligatorio, marca `parking-flow` como check requerido en las reglas de ambas ramas de GitHub.
+
+Para correr las pruebas de TypeScript y Vue dentro de Docker, ejecuta `docker build --target build ./frontend`. Las pruebas `*.test.ts` están junto al código que verifican.
 
 Con Compose activo, puedes reproducir la comprobación en un contenedor de Node:
 
@@ -27,3 +29,7 @@ docker compose run --rm smoke
 ```
 
 El hito está limitado a uso local. La autenticación, la administración de tarifas desde la web y el despliegue corresponden a etapas posteriores.
+
+## Migraciones de PostgreSQL
+
+Flyway aplica automáticamente los archivos SQL en `backend/src/main/resources/db/migration/` al arrancar Spring Boot. `V1__parking.sql` crea las tablas, las restricciones y la configuración inicial. Para cambiar el esquema, agrega una migración como `V2__descripcion_del_cambio.sql`. Conserva intactas las migraciones que ya se aplicaron. La prueba HTTP de CI arranca con una base nueva y verifica el flujo sobre el esquema creado por Flyway.

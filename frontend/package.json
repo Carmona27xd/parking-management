@@ -2,12 +2,20 @@
   "name": "parking-web",
   "private": true,
   "type": "module",
-  "scripts": { "build": "vue-tsc --noEmit && vite build" },
-  "dependencies": { "vue": "3.5.25" },
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "vue": "3.5.25"
+  },
   "devDependencies": {
     "@vitejs/plugin-vue": "6.0.2",
+    "@vue/test-utils": "2.4.6",
+    "jsdom": "26.1.0",
     "typescript": "5.9.3",
     "vite": "7.2.2",
+    "vitest": "4.1.0",
     "vue-tsc": "3.1.4"
   }
 }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { parkingRequest } from './api'
 
 interface Stay {
   id: number
@@ -24,21 +25,8 @@ const notice = ref('')
 const money = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' })
 const date = new Intl.DateTimeFormat('es-MX', { dateStyle: 'short', timeStyle: 'short' })
 
-async function request<T>(path = '', body?: object): Promise<T> {
-  const response = await fetch('/api/parking' + path, body === undefined ? undefined : {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  })
-  if (!response.ok) {
-    const problem = await response.json().catch(() => null)
-    throw new Error(problem?.detail ?? 'No se pudo completar la solicitud. Intenta de nuevo.')
-  }
-  return response.json()
-}
-
 async function refresh() {
-  dashboard.value = await request<Dashboard>()
+  dashboard.value = await parkingRequest<Dashboard>()
 }
 
 async function run(action: () => Promise<void>) {
@@ -57,7 +45,7 @@ async function run(action: () => Promise<void>) {
 
 function registerEntry() {
   return run(async () => {
-    const stay = await request<Stay>('/stays', { plate: plate.value })
+    const stay = await parkingRequest<Stay>('/stays', { plate: plate.value })
     plate.value = ''
     notice.value = 'Entrada registrada para ' + stay.plate + '.'
     await refresh()
@@ -66,7 +54,7 @@ function registerEntry() {
 
 function registerExit(id: number) {
   return run(async () => {
-    const stay = await request<Stay>('/stays/' + id + '/exit', {})
+    const stay = await parkingRequest<Stay>('/stays/' + id + '/exit', {})
     notice.value = 'Salida de ' + stay.plate + ' registrada. Total: ' + money.format(stay.amount ?? 0) + ' MXN.'
     await refresh()
   })
