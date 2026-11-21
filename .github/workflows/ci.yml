@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+jobs:
+  parking-flow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build Vue and Spring Boot, start PostgreSQL
+        run: docker compose up --build -d
+      - name: Verify parking workflow
+        run: docker compose run --rm smoke
+      - name: Print container logs on failure
+        if: failure()
+        run: docker compose logs --no-color
+      - name: Stop containers
+        if: always()
+        run: docker compose down -v

@@ -1,0 +1,38 @@
+* { box-sizing: border-box; }
+:root {
+  font-family: system-ui, sans-serif;
+  color: #142435;
+  background: #eef3f7;
+}
+body { margin: 0; }
+.shell { max-width: 1040px; margin-inline: auto; padding-inline: 24px; }
+.topbar { background: #102638; color: #fff; }
+.brand { padding-block: 16px; font-weight: 650; display: flex; align-items: center; gap: 12px; }
+.brand span { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 7px; background: #a7efcf; color: #102638; font-weight: 800; }
+main { padding-block: 28px 40px; }
+h1 { margin: 0 0 20px; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.04em; }
+h2 { margin: 0 0 16px; font-size: 1.2rem; }
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.summary > div { border-radius: 12px; padding: 18px; color: #fff; background: #193850; }
+.summary > div:first-child { color: #143627; background: #b7ebd4; }
+.summary strong { display: block; font-size: 1.95rem; margin-top: 6px; }
+.summary small { font-size: .9rem; }
+.panel { margin-bottom: 12px; padding: 20px; background: #fff; border: 1px solid #d8e2eb; border-radius: 12px; }
+label { display: block; margin-bottom: 6px; font-weight: 600; }
+.entry-fields { display: flex; flex-wrap: wrap; gap: 8px; }
+input, button { font: inherit; border-radius: 8px; padding: 9px 14px; min-height: 42px; }
+input { max-width: 100%; border: 1px solid #8195a5; }
+button { background: #165b49; color: #fff; border: 1px solid #165b49; font-weight: 650; cursor: pointer; }
+button.secondary { color: #165b49; background: #fff; }
+button:disabled { opacity: .55; cursor: default; }
+:focus-visible { outline: 3px solid #156aa7; outline-offset: 3px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 10px 12px 10px 0; border-bottom: 1px solid #e1e8ee; }
+th { font-size: .875rem; color: #476073; }
+tr:last-child td { border: 0; }
+.plate { letter-spacing: .04em; }
+.muted { color: #476073; margin-bottom: 0; }
+.message { padding: 12px 16px; border-radius: 8px; }
+.error { color: #851e20; background: #ffe3e4; }
+.notice { color: #174a37; background: #d7f4e6; }
