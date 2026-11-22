@@ -1,6 +1,7 @@
 **/target/
 **/node_modules/
 **/dist/
+/frontend/.stryker-tmp/
 .env
 /work/
 /outputs/
