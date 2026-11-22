@@ -64,7 +64,6 @@ onMounted(() => run(refresh))
 </script>
 
 <template>
-  <header class="topbar"><div class="shell brand"><span aria-hidden="true">P</span> Estacionamiento</div></header>
   <main class="shell">
     <h1>Operación</h1>
     <p v-if="error" class="message error" role="alert">{{ error }}</p>

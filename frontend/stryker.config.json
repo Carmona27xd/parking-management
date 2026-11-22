@@ -1,0 +1,9 @@
+{
+  "testRunner": "vitest",
+  "vitest": {
+    "configFile": "vite.config.ts"
+  },
+  "mutate": ["src/auth.ts"],
+  "reporters": ["clear-text", "progress"],
+  "thresholds": { "break": 90 }
+}
