@@ -18,6 +18,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/parking
       SPRING_DATASOURCE_USERNAME: parking
       SPRING_DATASOURCE_PASSWORD: local-parking
+      PARKING_ADMIN_PASSWORD: "${PARKING_ADMIN_PASSWORD:-}"
+      PARKING_COOKIE_SECURE: "${PARKING_COOKIE_SECURE:-false}"
     depends_on:
       db:
         condition: service_healthy
